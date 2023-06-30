@@ -5,7 +5,10 @@ CO13  Modified Excess Template Binned Likelihood fit
 Description:
 This example does a single binned likelihood fit of just the hydrogen gas component, comparing how likely
 gamma rays from hydrogen gas (H2) distributions modeled from CO13 measurements predict our observed data 
-compared to gamma rays from hydrogen gas (H2) distributions modeled from CO12 measurements. 
+compared to gamma rays from hydrogen gas (H2) distributions modeled from CO12 measurements. We do this for
+a 1deg x 50deg region of the sky. 
+
+Ref. https://journals.aps.org/prd/abstract/10.1103/PhysRevD.107.123032
 
 There are many sources of gamma rays in the sky, one component comes from pions interacting with hydrogen 
 ga (H2). To construct an accurate model of the gamma rays from the H2 component, we need an accurate model 
@@ -83,12 +86,13 @@ My process is this:
     
 (2) Run one simluation using multitest.sub (this will be sim 0), running a full
     simulation from start to finish (6hrs), saving all the intermediate files
-    along the way. Ensure that lines 167-170 are *uncommmented* and line 335 is *commented*.
+    along the way. Ensure that lines 181-184 are *uncommmented* and line 350 is 
+    *commented*.
     
     $ sbatch --array=0-0 multitest.sub
 
-(3) Once that finishes go to the ~/sims_example/output/sim_0 directory and copy all the 
-    files over to the work directory 
+(3) Once that finishes go to the /output/sim_0 directory and copy all the files 
+    over to the work directory 
     
     $ cp *.fits ../../workdir_example/
     
@@ -304,10 +308,11 @@ def main(cmd_line):
 
     # So, free all other parameters and fit:
     gta.free_sources(free=True)
-    gta.free_index("galdiff08", free=False)
-    gta.free_index("galdiff09", free=False)
     gta.free_source("galdiff07",free=False)
     gta.free_source("galdiff09", free=False)
+    
+    gta.free_index("galdiff08", free=False)
+    
 
     Fit2 = gta.fit()
     alternative = Fit2["loglike"]

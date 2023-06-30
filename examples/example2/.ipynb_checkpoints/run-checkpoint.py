@@ -1,14 +1,18 @@
 """
-Example 1:
-CO13  Modified Excess Template Binned Likelihood fit
+Example 2:
+CO13 Smart Excess Template Binned Likelihood fit
 
 Description:
 This example does a single binned likelihood fit of just the hydrogen gas component, comparing how likely
-gamma rays from hydrogen gas (H2) distributions modeled from CO13 measurements predict our observed data 
-compared to gamma rays from hydrogen gas (H2) distributions modeled from CO12 measurements. We do this for
-a 1deg x 50deg region of the sky. 
+gamma rays from hydrogen gas (H2) distributions modeled from machine-learning dervied CO13 measurements predict 
+our observed data compared to gamma rays from hydrogen gas (H2) distributions modeled from CO12 measurements. 
 
-Ref. https://journals.aps.org/prd/abstract/10.1103/PhysRevD.107.123032
+We use a convolutional neural network defined in https://journals.aps.org/prd/abstract/10.1103/PhysRevD.107.063018
+to predict the CO13 abundance (observed by MOPRA) from the CO12 distribution (observed by DAME) for a small
+1deg x 50deg region of the sky along the galactic plane.
+
+Ultimately, we want to use this to predict the CO13 abundance near the galactic center, where we only have 
+CO12 abundance data.
 
 There are many sources of gamma rays in the sky, one component comes from pions interacting with hydrogen 
 ga (H2). To construct an accurate model of the gamma rays from the H2 component, we need an accurate model 
@@ -86,20 +90,19 @@ My process is this:
     
 (2) Run one simluation using multitest.sub (this will be sim 0), running a full
     simulation from start to finish (6hrs), saving all the intermediate files
-    along the way. Ensure that lines 181-184 are *uncommmented* and line 350 is 
-    *commented*.
+    along the way. Ensure that lines 184-187 are *uncommmented* and line 335 is *commented*.
     
     $ sbatch --array=0-0 multitest.sub
 
-(3) Once that finishes go to the /output/sim_0 directory and copy all the files 
-    over to the work directory 
+(3) Once that finishes go to the /output/sim_0 directory and copy all the 
+    files over to the work directory 
     
     $ cp *.fits ../../workdir_example/
     
     Then copy the ltcube*.fits file and save it to the fermi-ml/data directory.
     
 (4) If that worked, yay! Go ahead and ensure that lines 167-170 are *commmented* and 
-    line 335 is *uncommented*. The run 1000 sims by doing:
+    line 353 is *uncommented*. The run 1000 sims by doing:
     
     $ python run_jobs.py
     
@@ -111,7 +114,7 @@ My process is this:
 
 
 # Imports
-from time import sleep
+from time import sleepx
 from random import randint
 import resource
 import random,shutil,yaml
@@ -294,8 +297,8 @@ def main(cmd_line):
     gta.set_norm("galdiff05",0.8) # CO13 r=6-9
     gta.set_norm("galdiff06",1.2) # CO13 r=10-12
     gta.set_norm("galdiff07",1.0) # CO13 r=13-16
-    gta.set_norm("galdiff08",1.0) # CO13 excess template map
-    gta.set_norm("galdiff09",0.0) # Smart excess template map
+    gta.set_norm("galdiff08",0.0) # CO13 excess template map
+    gta.set_norm("galdiff09",1.0) # Smart excess template map
 
     
     # We could switch from the CO13 excess template to the 
@@ -309,9 +312,9 @@ def main(cmd_line):
     # So, free all other parameters and fit:
     gta.free_sources(free=True)
     gta.free_source("galdiff07",free=False)
-    gta.free_source("galdiff09", free=False)
-    
-    gta.free_index("galdiff08", free=False)
+    gta.free_source("galdiff08", free=False)
+
+    gta.free_index("galdiff09", free=False)
     
 
     Fit2 = gta.fit()

@@ -4,7 +4,10 @@ CO13  Modified Excess Template Binned Likelihood fit
 Description:
 This example does a single binned likelihood fit of just the hydrogen gas component, comparing how likely
 gamma rays from hydrogen gas (H2) distributions modeled from CO13 measurements predict our observed data 
-compared to gamma rays from hydrogen gas (H2) distributions modeled from CO12 measurements. 
+compared to gamma rays from hydrogen gas (H2) distributions modeled from CO12 measurements. We do this for
+a 1deg x 50deg region of the sky. 
+
+Ref. https://journals.aps.org/prd/abstract/10.1103/PhysRevD.107.123032
 
 There are many sources of gamma rays in the sky, one component comes from pions interacting with hydrogen 
 ga (H2). To construct an accurate model of the gamma rays from the H2 component, we need an accurate model 
@@ -86,7 +89,7 @@ My process is this:
     
     $ sbatch --array=0-0 multitest.sub
 
-(3) Once that finishes go to the ~/sims_example/output/sim_0 directory and copy all the 
+(3) Once that finishes go to the /output/sim_0 directory and copy all the 
     files over to the work directory 
     
     $ cp *.fits ../../workdir_example/
@@ -98,5 +101,6 @@ My process is this:
     
     $ python run_jobs.py
     
-(It is good practice to run 1 sim first to make sure everything works properly before running a thousand or so anyways).
-
+    (It is good practice to run 1 sim first to make sure e
+    everything works properly before running a thousand or so
+    anyways).
