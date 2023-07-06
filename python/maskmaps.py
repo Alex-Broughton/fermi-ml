@@ -5,7 +5,7 @@ import astropy.wcs.utils as utils
 import numpy as np
 
 #upload footprint:
-hdu = fits.open("foot_print.fits")
+hdu = fits.open("/pub/abrought/fermi-ml/data/foot_print.fits")
 foot_header = hdu[0].header
 footprint = hdu[0].data
 foot_wcs = WCS(foot_header)
@@ -35,11 +35,11 @@ for each in combine:
     
     print(low,high)
     
-    this_dir  = "/pub/abrought/GALPROPModels/1sigma/tiled_alt/Combined/"
-    that_dir  = "/pub/abrought/GALPROPModels/1sigma/tiled_alt/Masked/"
-    this_file = this_dir + "reprojected_pion_decay_HIR_mapcube_comp_%s_%s_56_Mopra.fits" % (str(low),str(high))
+    this_dir  = "/pub/abrought/fermi-ml/data/M31/combined/"
+    that_dir  = "/pub/abrought/fermi-ml/data/M31/masked/"
+    this_file = this_dir + "reprojected_pion_decay_HIR_mapcube_comp_%s_%s_56_M31_AIC.fits" % (str(low),str(high))
 
-    savefile = that_dir + "masked_" + "reprojected_pion_decay_HIR_mapcube_comp_%s_%s_56_Mopra.fits" % (str(low),str(high))
+    savefile = that_dir + "masked_" + "reprojected_pion_decay_HIR_mapcube_comp_%s_%s_56_M31_AIC.fits" % (str(low),str(high))
 
     hdu = fits.open(this_file)
     gal_header = hdu[0].header

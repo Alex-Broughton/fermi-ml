@@ -11,10 +11,9 @@ import matplotlib.pyplot as plt
 #the reprojection is done for each map corresponding to number of GALPROP radial bins:
 for i in range(0,17):
     print(i)
-    this_dir  = "/pub/abrought/GALPROPModels/1sigma/tiled_alt/GALPROP/"
-    that_dir  = "/pub/abrought/GALPROPModels/1sigma/tiled_alt/Reprojected/"
-    this_file = "pion_decay_HIR_mapcube_comp_%i_56_Mopra.gz" %i
-    #this_file = this_dir + "bremss_H2R_mapcube_comp_%i_56_M31_AIC.gz" %i
+    this_dir  = "/pub/abrought/fermi-ml/data/M31/"
+    that_dir  = "/pub/abrought/fermi-ml/data/M31/reprojected/"
+    this_file = "pion_decay_HIR_mapcube_comp_%i_56_M31_AIC.gz" %i
     savefile = that_dir + 'reprojected_' + this_file
     
     fits.setval(this_dir + this_file, 'CUNIT3', value='MeV')
