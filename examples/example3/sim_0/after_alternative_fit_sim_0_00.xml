@@ -1,0 +1,103 @@
+<?xml version="1.0" standalone="no"?>
+<source_library title="source library">
+  <source name="galdiff04" type="DiffuseSource">
+    <spectrum type="PowerLaw">
+      <parameter error="0.0324750378" free="1" max="10" min="0" name="Prefactor" scale="1" value="1.006986622" />
+      <parameter error="0.03205267092" free="1" max="1" min="-1" name="Index" scale="-1" value="-0.002271426616" />
+      <parameter free="0" max="1000" min="1000" name="Scale" scale="1" value="1000" />
+    </spectrum>
+    <spatialModel file="/pub/abrought/fermi-ml/data/CO12_Baseline/masked_reprojected_pion_decay_annuli_0_5.fits" type="MapCubeFunction">
+      <parameter free="0" max="10" min="0" name="Normalization" scale="1" value="1" />
+    </spatialModel>
+  </source>
+  <source name="galdiff05" type="DiffuseSource">
+    <spectrum type="PowerLaw">
+      <parameter error="0.009802959375" free="1" max="10" min="0" name="Prefactor" scale="1" value="1.014273618" />
+      <parameter error="0.00939124067" free="1" max="1" min="-1" name="Index" scale="-1" value="0.01155181506" />
+      <parameter free="0" max="1000" min="1000" name="Scale" scale="1" value="1000" />
+    </spectrum>
+    <spatialModel file="/pub/abrought/fermi-ml/data/CO12_Baseline/masked_reprojected_pion_decay_annuli_6_9.fits" type="MapCubeFunction">
+      <parameter free="0" max="10" min="0" name="Normalization" scale="1" value="1" />
+    </spatialModel>
+  </source>
+  <source name="galdiff06" type="DiffuseSource">
+    <spectrum type="PowerLaw">
+      <parameter error="0.009737281867" free="1" max="10" min="0" name="Prefactor" scale="1" value="1.006154755" />
+      <parameter error="0.01057310331" free="1" max="1" min="-1" name="Index" scale="-1" value="0.009792789113" />
+      <parameter free="0" max="1000" min="1000" name="Scale" scale="1" value="1000" />
+    </spectrum>
+    <spatialModel file="/pub/abrought/fermi-ml/data/CO12_Baseline/masked_reprojected_pion_decay_annuli_10_12.fits" type="MapCubeFunction">
+      <parameter free="0" max="10" min="0" name="Normalization" scale="1" value="1" />
+    </spatialModel>
+  </source>
+  <source name="galdiff07" type="DiffuseSource">
+    <spectrum type="PowerLaw">
+      <parameter free="0" max="10" min="0" name="Prefactor" scale="1" value="1" />
+      <parameter free="0" max="1" min="-1" name="Index" scale="-1" value="0" />
+      <parameter free="0" max="1000" min="1000" name="Scale" scale="1" value="1000" />
+    </spectrum>
+    <spatialModel file="/pub/abrought/fermi-ml/data/CO12_Baseline/masked_reprojected_pion_decay_annuli_13_16.fits" type="MapCubeFunction">
+      <parameter free="0" max="10" min="0" name="Normalization" scale="1" value="1" />
+    </spatialModel>
+  </source>
+  <source name="galdiff08" type="DiffuseSource">
+    <spectrum type="PowerLaw">
+      <parameter error="0.02736288294" free="1" max="10" min="0" name="Prefactor" scale="1" value="0.9745222491" />
+      <parameter free="0" max="1" min="-1" name="Index" scale="-1" value="0" />
+      <parameter free="0" max="1000" min="1000" name="Scale" scale="1" value="1000" />
+    </spectrum>
+    <spatialModel file="/pub/abrought/fermi-ml/data/LAT_excess_template_datacube_modified.fits" type="MapCubeFunction">
+      <parameter free="0" max="10" min="0" name="Normalization" scale="1" value="1" />
+    </spatialModel>
+  </source>
+  <source name="galdiff09" type="DiffuseSource">
+    <spectrum type="PowerLaw">
+      <parameter free="0" max="10" min="0" name="Prefactor" scale="1" value="0" />
+      <parameter free="0" max="1" min="-1" name="Index" scale="-1" value="0" />
+      <parameter free="0" max="1000" min="1000" name="Scale" scale="1" value="1000" />
+    </spectrum>
+    <spatialModel file="/pub/abrought/fermi-ml/data/LAT_excess_template_datacube_smart.fits" type="MapCubeFunction">
+      <parameter free="0" max="10" min="0" name="Normalization" scale="1" value="1" />
+    </spatialModel>
+  </source>
+  <source name="galdiff10" type="DiffuseSource">
+    <spectrum type="PowerLaw">
+      <parameter free="0" max="10" min="0.1" name="Prefactor" scale="1" value="1" />
+      <parameter free="0" max="1" min="-1" name="Index" scale="-1" value="0" />
+      <parameter free="0" max="1000" min="1000" name="Scale" scale="1" value="1000" />
+    </spectrum>
+    <spatialModel file="/pub/abrought/fermi-ml/data/M31/masked/masked_reprojected_pion_decay_HIR_mapcube_comp_0_5_56_M31_AIC.fits" type="MapCubeFunction">
+      <parameter free="0" max="10" min="0" name="Normalization" scale="1" value="1" />
+    </spatialModel>
+  </source>
+  <source name="galdiff11" type="DiffuseSource">
+    <spectrum type="PowerLaw">
+      <parameter free="0" max="10" min="0.1" name="Prefactor" scale="1" value="1" />
+      <parameter free="0" max="1" min="-1" name="Index" scale="-1" value="0" />
+      <parameter free="0" max="1000" min="1000" name="Scale" scale="1" value="1000" />
+    </spectrum>
+    <spatialModel file="/pub/abrought/fermi-ml/data/M31/masked/masked_reprojected_pion_decay_HIR_mapcube_comp_6_9_56_M31_AIC.fits" type="MapCubeFunction">
+      <parameter free="0" max="10" min="0" name="Normalization" scale="1" value="1" />
+    </spatialModel>
+  </source>
+  <source name="galdiff12" type="DiffuseSource">
+    <spectrum type="PowerLaw">
+      <parameter free="0" max="10" min="0.1" name="Prefactor" scale="1" value="1" />
+      <parameter free="0" max="1" min="-1" name="Index" scale="-1" value="0" />
+      <parameter free="0" max="1000" min="1000" name="Scale" scale="1" value="1000" />
+    </spectrum>
+    <spatialModel file="/pub/abrought/fermi-ml/data/M31/masked/masked_reprojected_pion_decay_HIR_mapcube_comp_10_12_56_M31_AIC.fits" type="MapCubeFunction">
+      <parameter free="0" max="10" min="0" name="Normalization" scale="1" value="1" />
+    </spatialModel>
+  </source>
+  <source name="galdiff13" type="DiffuseSource">
+    <spectrum type="PowerLaw">
+      <parameter free="0" max="10" min="0.1" name="Prefactor" scale="1" value="1" />
+      <parameter free="0" max="1" min="-1" name="Index" scale="-1" value="0" />
+      <parameter free="0" max="1000" min="1000" name="Scale" scale="1" value="1000" />
+    </spectrum>
+    <spatialModel file="/pub/abrought/fermi-ml/data/M31/masked/masked_reprojected_pion_decay_HIR_mapcube_comp_13_16_56_M31_AIC.fits" type="MapCubeFunction">
+      <parameter free="0" max="10" min="0" name="Normalization" scale="1" value="1" />
+    </spatialModel>
+  </source>
+</source_library>

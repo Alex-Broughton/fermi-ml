@@ -150,19 +150,19 @@ def main(cmd_line):
     # Initializations
     
     sim = cmd_line[1]
-    indir = os.chdir()
-    outdir = "%s/output/sim_%s" % (%indir, %sim)
+    indir = os.getcwd()
+    outdir = "%s/output/sim_%s" % (indir, sim)
 
     # Check that the output directory exists, if not create one.
     # The out put directory should have the format "sims_<name of workdir>"
     # and contain a directory for the output sims, the output logs (out) 
     # and the test statistic outputs (tsout)
     
-    if(!os.path.isdir("%s/output" %indir)):
+    if not (os.path.isdir("%s/output" %indir)):
         os.mkdir("mkdir %s/output" %indir)
-    if(!os.path.isdir("%s/tsout" %indir)):
+    if not (os.path.isdir("%s/tsout" %indir)):
         os.mkdir("mkdir %s/tsout" %indir)
-    if(!os.path.isdir("%s/spectraout" %indir)):
+    if not (os.path.isdir("%s/spectraout" %indir)):
         os.mkdir("mkdir %s/spectraout" %indir)
     if(os.path.isdir(outdir)==True):
         shutil.rmtree(outdir)
@@ -178,10 +178,10 @@ def main(cmd_line):
     # them. The first time we run this code, we should generate all of them and 
     # all of these lines should be uncommented (~6hr run time for 1 sim). Subsequently,
     # we can re-use these data products and it will only take (~10 min per sim).
-    #shutil.copy2('%s/srcmap_00.fits' %indir, 'srcmap_00.fits')
-    #shutil.copy2('%s/bexpmap_00.fits' %indir, 'bexpmap_00.fits')
-    #shutil.copy2('%s/ccube_00.fits' %indir, 'ccube_00.fits')
-    #shutil.copy2('%s/ft1_00.fits' %indir, 'ft1_00.fits')
+    shutil.copy2('%s/sim_0/srcmap_00.fits' %indir, 'srcmap_00.fits')
+    shutil.copy2('%s/sim_0/bexpmap_00.fits' %indir, 'bexpmap_00.fits')
+    shutil.copy2('%s/sim_0/ccube_00.fits' %indir, 'ccube_00.fits')
+    shutil.copy2('%s/sim_0/ft1_00.fits' %indir, 'ft1_00.fits')
 
     
     
@@ -213,7 +213,7 @@ def main(cmd_line):
     gta.set_norm("galdiff06",0.0) #CO12_r=10-12
     gta.set_norm("galdiff07",0.0) #CO12_r=13-16
     gta.set_norm("galdiff08",0.0) 
-    gta.set_norm("galdiff09",0.0) 
+    gta.set_norm("galdiff09",0.0)
     
     # With just the "truth" maps loaded and non-zero, we will create one 
     # "realization" of Fermi-LAT observations by randomizing ("simulating") 
@@ -258,6 +258,10 @@ def main(cmd_line):
     gta.set_norm("galdiff05",0.8)
     gta.set_norm("galdiff06",1.2)
     gta.set_norm("galdiff07",1.0)
+    gta.set_norm("galdiff10",1.0)
+    gta.set_norm("galdiff11",1.0)
+    gta.set_norm("galdiff12",1.0)
+    gta.set_norm("galdiff13",1.0)
 
     # Now we will fit these gamma ray maps from the H2 component as derived by CO12 
     # to the "truth" dataset by varying the normalization of each map in each annulus.
@@ -267,6 +271,10 @@ def main(cmd_line):
     gta.free_source("galdiff07",free=False) # Very little flux in this coming from this annulus, and we ignore it by just fixing this to be constant
     gta.free_source("galdiff08",free=False)
     gta.free_source("galdiff09",free=False)
+    gta.free_source("galdiff10",free=False)
+    gta.free_source("galdiff11",free=False)
+    gta.free_source("galdiff12",free=False)
+    gta.free_source("galdiff13",free=False)
 
     Fit = gta.fit()
     null = Fit["loglike"] # this gives us our likelihood for our null test!
@@ -310,9 +318,11 @@ def main(cmd_line):
     gta.free_sources(free=True)
     gta.free_source("galdiff07",free=False)
     gta.free_source("galdiff09", free=False)
-    
     gta.free_index("galdiff08", free=False)
-    
+    gta.free_source("galdiff10",free=False)
+    gta.free_source("galdiff11",free=False)
+    gta.free_source("galdiff12",free=False)
+    gta.free_source("galdiff13",free=False)
 
     Fit2 = gta.fit()
     alternative = Fit2["loglike"]
@@ -321,19 +331,19 @@ def main(cmd_line):
     gta.write_model_map("alternative_model_sim_%s" %sim)
     
     # Calculate source spectrum:
-    ltcube = '/pub/abrought/fermi-ml/data/ltcube.fits'
+    ltcube = "/pub/abrought/fermi-ml/examples/example3/sim_0/ltcube_00.fits"
     obs = BinnedObs(srcMaps='srcmap_00.fits',expCube=ltcube,binnedExpMap='bexpmap_00.fits',irfs='P8R3_CLEAN_V2')
     like = BinnedAnalysis(obs,'after_alternative_fit_sim_%s_00.xml' %sim, optimizer='MINUIT')
     Elist,Flist = CalcFlux(like,'galdiff08')
     data = {"energ[MeV]":Elist,"flux[MeV/cm^2/s]":Flist}
     df = pd.DataFrame(data=data)
-    df.to_csv("%s/spectraout/excess_flux_sim_%s.dat" % (%indir, %sim),sep="\t",index=False)
+    df.to_csv("%s/spectraout/excess_flux_sim_%s.dat" % (indir, sim),sep="\t",index=False)
     
     # Calculte TS:
     TS = -2*(null - alternative)
 
     # Write final TS to file:
-    savefile = "%s/tsout/TS_sim_%s.txt" % (%indir, %sim)
+    savefile = "%s/tsout/TS_sim_%s.txt" % (indir, sim)
     f = open(savefile,"w")
     f.write(str(TS))
     f.close()

@@ -4,7 +4,7 @@
 #SBATCH -A SMURGIA_LAB		      ## Specify lab account
 #SBATCH -N 1                          ## run on a single node
 #SBATCH -n 1                          ## request 1 task/cpu (1 CPU)
-#SBATCH -o /pub/abrought/h2sim_output/sims_test/slurmout/slurm-%a.out ##STDOUT
+#SBATCH -o /pub/abrought/fermi-ml/examples/example3/slurmout/slurm-%a.out ##STDOUT
 ##SBATCH --mail-type=end,time_limit,fail,invalid_depend
 ##SBATCH --mail-user=abrought@uci.edu  ## use this email address
 #SBATCH -t 10:00:00

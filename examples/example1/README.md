@@ -75,13 +75,12 @@ I've included some lines of code in here to help with the workflow for that!
 
 My process is this:
 
-(1) Create a work directory (e.g. workdir_example) that has a config.py file and 
-    a run.py file. I'll typically follow the naming convention sims_<workdir name> 
-    (e.g. sims_example). The output directory should contain a directory called 
-    /out. This code will save your sim data and output maps to the corresponding 
-    output folder /output/sim_#, and the log files will be under /out/out-#.txt, 
+(1) Create a work directory (e.g. example1) that has a config.py file and 
+    a run.py file. The workdir directory should contain directories called /output,
+    /slurmout, /tsout. This code will save your sim data and output maps to the corresponding 
+    output folder /output/sim_#, and the log files will be under /slurmout/out-#.txt, 
     and the TS data will be under /tsout/TS_sim_#.txt. Set these parameters in 
-    this file at the beginning of main().
+    this file at the beginning of main(). Update multitest.sub to the correct output locations.
     
 (2) Run one simluation using multitest.sub (this will be sim 0), running a full
     simulation from start to finish (6hrs), saving all the intermediate files
@@ -89,18 +88,15 @@ My process is this:
     
     $ sbatch --array=0-0 multitest.sub
 
-(3) Once that finishes go to the /output/sim_0 directory and copy all the 
-    files over to the work directory 
-    
-    $ cp *.fits ../../workdir_example/
-    
-    Then copy the ltcube*.fits file and save it to the fermi-ml/data directory.
+(3) Once that finishes go to the /output/sim_0 directory and make sure the simulation finished
+    and generated a reasonable TS value and maps.
     
 (4) If that worked, yay! Go ahead and ensure that lines 167-170 are *commmented* and 
-    line 335 is *uncommented*. The run 1000 sims by doing:
+    line 335 is *uncommented*. Add the location of the ltcube_00.fits (under sim_0) 
+    to the config file in the work directory. Then run 1000 sims by doing:
     
     $ python run_jobs.py
     
-    (It is good practice to run 1 sim first to make sure e
-    everything works properly before running a thousand or so
-    anyways).
+(It is good practice to run 1 sim first to make sure e
+everything works properly before running a thousand or so
+anyways).

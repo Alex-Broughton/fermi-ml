@@ -1,7 +1,7 @@
 data:
   evfile: '/pub/abrought/fermi-ml/data/filelist.txt' # Contains 12 yrs of fermi data
   scfile: '/pub/abrought/fermi-ml/data/spacecraft.fits' # Contains info about telescope/response function
-  ltcube: '/pub/abrought/fermi-ml/examples/example3/sim_0/ltcube_00.fits' # Contains information about the exposure time at each location on the sky
+  #ltcube: '/pub/abrought/fermi-ml/data/ltcube.fits' # Contains information about the exposure time at each location on the sky
 
 binning:
 
